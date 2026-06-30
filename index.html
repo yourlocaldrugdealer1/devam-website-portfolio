@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devam Soni &mdash; Websites for Ahmedabad's Local Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A2238;
+    --ink-soft:#2E3859;
+    --paper:#FAF6EF;
+    --paper-warm:#F3EBDC;
+    --marigold:#E8A33D;
+    --marigold-dark:#C9851F;
+    --sage:#7C9885;
+    --sage-dark:#5F7A68;
+    --line:rgba(26,34,56,0.12);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+
+  h1,h2,h3{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+  }
+
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--marigold-dark);
+    outline-offset:3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,246,239,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px; max-width:1160px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Sora',sans-serif; font-weight:700; font-size:1.18rem;
+    display:flex; align-items:center; gap:10px;
+  }
+  .logo .mark{
+    width:32px;height:32px;
+    background:var(--ink);
+    border-radius:7px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--marigold);
+    font-size:0.95rem;
+    font-weight:800;
+    flex-shrink:0;
+    transform:rotate(-4deg);
+  }
+  nav ul{list-style:none; display:flex; gap:30px; font-size:0.92rem; font-weight:500;}
+  nav ul a{position:relative; padding-bottom:4px;}
+  nav ul a::after{
+    content:''; position:absolute; left:0; bottom:0;
+    width:0; height:2px; background:var(--marigold-dark);
+    transition:width 0.25s ease;
+  }
+  nav ul a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--ink); color:var(--paper) !important;
+    padding:10px 20px; border-radius:6px; font-weight:600; font-size:0.88rem;
+  }
+  .nav-cta:hover{background:var(--ink-soft);}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:84px 0 64px; border-bottom:1px solid var(--line); position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:0.78rem;
+    text-transform:uppercase; letter-spacing:0.14em; color:var(--marigold-dark);
+    font-weight:500; margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:24px;height:1px; background:var(--marigold-dark);}
+  .hero h1{font-size:clamp(2.4rem, 4.6vw, 3.7rem); margin-bottom:20px;}
+  .hero h1 .accent{color:var(--marigold-dark);}
+  .hero p{
+    font-size:1.1rem; line-height:1.62; color:rgba(26,34,56,0.72);
+    max-width:48ch; margin-bottom:30px;
+  }
+  .hero-actions{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--ink); color:var(--paper);
+    padding:15px 28px; border-radius:7px; font-weight:600; font-size:0.95rem;
+    display:inline-block; transition:transform 0.2s ease, background 0.2s ease;
+  }
+  .btn-primary:hover{background:var(--marigold-dark); transform:translateY(-2px);}
+  .btn-ghost{
+    font-weight:600; font-size:0.95rem; display:flex; align-items:center; gap:8px;
+    border-bottom:1px solid var(--ink); padding-bottom:3px;
+  }
+
+  .hero-stat-row{
+    display:flex; gap:28px; margin-top:38px; flex-wrap:wrap;
+  }
+  .hero-stat .num{font-family:'Sora',sans-serif; font-weight:800; font-size:1.7rem; color:var(--ink);}
+  .hero-stat .lbl{font-size:0.8rem; color:rgba(26,34,56,0.6); font-weight:500;}
+
+  /* signage illustration */
+  .hero-visual{position:relative; aspect-ratio:1/1;}
+  .signpost{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  .sign-card{
+    background:var(--ink);
+    border-radius:10px;
+    padding:30px 26px;
+    width:78%;
+    box-shadow:0 24px 50px -16px rgba(26,34,56,0.35);
+    position:relative;
+  }
+  .sign-card::before{
+    content:'';
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+    width:3px; height:14px; background:var(--ink);
+  }
+  .sign-card .shop-name{
+    font-family:'Sora',sans-serif; color:var(--paper); font-weight:700;
+    font-size:1.5rem; margin-bottom:6px;
+  }
+  .sign-card .shop-tag{
+    font-family:'JetBrains Mono',monospace; color:var(--marigold);
+    font-size:0.75rem; letter-spacing:0.06em;
+  }
+  .sign-card .bulb-row{display:flex; gap:6px; margin-top:18px;}
+  .sign-card .bulb{width:7px;height:7px;border-radius:50%; background:var(--marigold); opacity:0.4;}
+  .sign-card .bulb.on{opacity:1; box-shadow:0 0 10px var(--marigold);}
+  .sign-card-2{
+    background:var(--sage); margin-top:-18px; transform:translateX(34px) rotate(2deg);
+    width:64%;
+  }
+  .sign-card-2 .shop-name{font-size:1.15rem;}
+  .sign-card-2::before{display:none;}
+  .sign-card-3{
+    background:var(--marigold); margin-top:-14px; transform:translateX(-30px) rotate(-3deg);
+    width:58%;
+  }
+  .sign-card-3 .shop-name, .sign-card-3 .shop-tag{color:var(--ink);}
+  .sign-card-3::before{display:none;}
+
+  /* ---------- TRUST STRIP ---------- */
+  .strip{background:var(--ink); color:var(--paper); padding:16px 0;}
+  .strip-inner{
+    display:flex; justify-content:space-around; flex-wrap:wrap; gap:18px;
+    font-family:'JetBrains Mono',monospace; font-size:0.8rem; letter-spacing:0.03em; text-align:center;
+  }
+  .strip-inner span{opacity:0.8;}
+  .strip-inner b{color:var(--marigold); font-weight:600;}
+
+  /* ---------- CATALOGUE (signature) ---------- */
+  .catalogue{padding:96px 0;}
+  .section-head{max-width:600px; margin:0 auto 52px; text-align:center;}
+  .section-head .eyebrow{justify-content:center;}
+  .section-head .eyebrow::before{display:none;}
+  .section-head h2{font-size:clamp(1.9rem, 3.6vw, 2.6rem); margin-bottom:14px;}
+  .section-head p{font-size:1.02rem; line-height:1.6; color:rgba(26,34,56,0.68);}
+
+  .catalogue-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
+  }
+  .cat-card{
+    background:var(--ink);
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cat-card:hover{transform:translateY(-6px); box-shadow:0 26px 50px -20px rgba(26,34,56,0.4);}
+  .cat-card-top{
+    padding:34px 26px 50px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cat-card-top::after{
+    content:'';
+    position:absolute; bottom:0; left:0; right:0; height:24px;
+    background:var(--paper);
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    transform:scale(1.3, 1);
+  }
+  .cat-card.cafe .cat-card-top{background:linear-gradient(155deg, #A6512F, #8A3F23);}
+  .cat-card.salon .cat-card-top{background:linear-gradient(155deg, #7C9885, #5F7A68);}
+  .cat-card.coming .cat-card-top{background:linear-gradient(155deg, #3E4972, #1A2238);}
+
+  .cat-tag{
+    font-family:'JetBrains Mono',monospace; font-size:0.7rem; text-transform:uppercase;
+    letter-spacing:0.12em; color:rgba(255,255,255,0.7); margin-bottom:10px; display:block;
+  }
+  .cat-card-top h3{color:#fff; font-size:1.5rem; margin-bottom:8px;}
+  .cat-card-top p{color:rgba(255,255,255,0.75); font-size:0.92rem; line-height:1.5;}
+
+  .cat-card-bottom{
+    background:var(--paper);
+    padding:20px 26px 26px;
+    color:var(--ink);
+  }
+  .cat-features{list-style:none; margin-bottom:18px;}
+  .cat-features li{
+    font-size:0.85rem; color:rgba(26,34,56,0.7);
+    padding:5px 0 5px 18px; position:relative;
+  }
+  .cat-features li::before{
+    content:'';
+    position:absolute; left:0; top:13px;
+    width:8px; height:1.5px; background:var(--marigold-dark);
+  }
+  .cat-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-weight:600; font-size:0.88rem; color:var(--ink);
+    border-bottom:1px solid var(--ink); padding-bottom:2px;
+  }
+  .cat-card.coming .cat-link{
+    color:rgba(26,34,56,0.4); border-color:rgba(26,34,56,0.25); cursor:default;
+  }
+  .cat-card.coming .cat-card-bottom{opacity:0.85;}
+
+  /* ---------- PROCESS ---------- */
+  .process{
+    padding:96px 0;
+    background:var(--paper-warm);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .process-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:24px;
+  }
+  .process-step{position:relative; padding-top:8px;}
+  .process-step .step-num{
+    font-family:'Sora',sans-serif; font-weight:800; font-size:0.85rem;
+    color:var(--marigold-dark); margin-bottom:14px; display:block;
+  }
+  .process-step h3{font-size:1.12rem; margin-bottom:8px;}
+  .process-step p{font-size:0.88rem; line-height:1.55; color:rgba(26,34,56,0.65);}
+  .process-step:not(:last-child)::after{
+    content:'';
+    position:absolute; top:14px; right:-12px;
+    width:8px; height:8px; border-top:1.5px solid var(--marigold-dark); border-right:1.5px solid var(--marigold-dark);
+    transform:rotate(45deg);
+    display:none;
+  }
+  @media(min-width:769px){
+    .process-step:not(:last-child)::after{display:block;}
+  }
+
+  /* ---------- PRICING ---------- */
+  .pricing{padding:96px 0;}
+  .pricing-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+    max-width:980px; margin:0 auto;
+  }
+  .price-card{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:32px 28px;
+    background:#fff;
+  }
+  .price-card.featured{
+    border-color:var(--marigold-dark);
+    background:var(--ink);
+    color:var(--paper);
+    position:relative;
+    transform:scale(1.03);
+  }
+  .price-card.featured .price-badge{
+    position:absolute; top:-12px; left:28px;
+    background:var(--marigold); color:var(--ink);
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem;
+    text-transform:uppercase; letter-spacing:0.08em;
+    padding:5px 12px; border-radius:20px; font-weight:600;
+  }
+  .price-card h3{font-size:1.2rem; margin-bottom:6px;}
+  .price-card .price{
+    font-family:'Sora',sans-serif; font-weight:800; font-size:2rem; margin-bottom:4px;
+  }
+  .price-card .price-note{font-size:0.8rem; opacity:0.65; margin-bottom:20px; display:block;}
+  .price-card ul{list-style:none; margin-bottom:0;}
+  .price-card li{
+    font-size:0.88rem; padding:7px 0 7px 20px; position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .price-card.featured li{border-bottom-color:rgba(250,246,239,0.14);}
+  .price-card li:last-child{border-bottom:none;}
+  .price-card li::before{
+    content:'\2713'; position:absolute; left:0; top:7px;
+    font-size:0.78rem; color:var(--marigold-dark); font-weight:700;
+  }
+  .price-card.featured li::before{color:var(--marigold);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    padding:100px 0 110px; background:var(--ink); color:var(--paper);
+  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .contact .eyebrow{color:var(--marigold);}
+  .contact .eyebrow::before{background:var(--marigold);}
+  .contact h2{font-size:clamp(2rem, 4vw, 2.7rem); margin-bottom:20px; color:#fff;}
+  .contact p{font-size:1.04rem; line-height:1.6; color:rgba(250,246,239,0.72); margin-bottom:30px; max-width:42ch;}
+  .contact-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-marigold{
+    background:var(--marigold); color:var(--ink);
+    padding:15px 28px; border-radius:7px; font-weight:700; font-size:0.95rem;
+    display:inline-block; transition:transform 0.2s ease;
+  }
+  .btn-marigold:hover{transform:translateY(-2px);}
+  .btn-outline{
+    border:1px solid rgba(250,246,239,0.3); color:var(--paper);
+    padding:15px 28px; border-radius:7px; font-weight:600; font-size:0.95rem;
+  }
+  .btn-outline:hover{border-color:var(--marigold);}
+
+  .contact-card{
+    background:rgba(250,246,239,0.05);
+    border:1px solid rgba(250,246,239,0.14);
+    border-radius:12px; padding:34px;
+  }
+  .contact-row{
+    display:flex; gap:14px; padding:15px 0;
+    border-bottom:1px solid rgba(250,246,239,0.12);
+  }
+  .contact-row:first-child{padding-top:0;}
+  .contact-row:last-child{border-bottom:none; padding-bottom:0;}
+  .contact-row .lbl{
+    font-family:'JetBrains Mono',monospace; font-size:0.74rem; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--marigold); width:80px; flex-shrink:0; padding-top:2px;
+  }
+  .contact-row .val a{border-bottom:1px solid rgba(250,246,239,0.4);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:32px 0; background:var(--ink); border-top:1px solid rgba(250,246,239,0.1);}
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    color:rgba(250,246,239,0.5); font-size:0.84rem;
+  }
+  .footer-inner a{color:rgba(250,246,239,0.7);}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:880px){
+    nav ul{display:none;}
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .hero-visual{order:-1; aspect-ratio:4/3;}
+    .catalogue-grid{grid-template-columns:1fr;}
+    .process-grid{grid-template-columns:1fr 1fr; gap:28px;}
+    .pricing-grid{grid-template-columns:1fr; max-width:420px;}
+    .price-card.featured{transform:scale(1);}
+    .contact-grid{grid-template-columns:1fr; gap:40px;}
+    .strip-inner{gap:10px 24px;}
+  }
+  @media (max-width:520px){
+    .process-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="logo"><span class="mark">DS</span>Devam Soni</a>
+    <nav>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="nav-cta">Get a website</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Web design &middot; Ahmedabad</div>
+      <h1>Your shop deserves more than a Justdial listing.<span class="accent"> Let's fix that.</span></h1>
+      <p>I design and build clean, fast websites for Ahmedabad's cafes, salons, and local shops &mdash; the kind that actually shows up when someone searches your name, not just a phone number on a directory page.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">See the work</a>
+        <a href="#contact" class="btn-ghost">Get in touch &rarr;</a>
+      </div>
+      <div class="hero-stat-row">
+        <div class="hero-stat"><div class="num">1 week</div><div class="lbl">avg. turnaround</div></div>
+        <div class="hero-stat"><div class="num">Flat</div><div class="lbl">pricing, no surprises</div></div>
+        <div class="hero-stat"><div class="num">Mobile</div><div class="lbl">first, always</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="signpost">
+        <div class="sign-card">
+          <span class="shop-tag">CAFE &middot; SAMPLE BUILD</span>
+          <div class="shop-name">Kasturi</div>
+          <div class="bulb-row">
+            <span class="bulb on"></span><span class="bulb on"></span><span class="bulb on"></span>
+            <span class="bulb"></span><span class="bulb"></span>
+          </div>
+        </div>
+        <div class="sign-card sign-card-2">
+          <span class="shop-tag">SALON &middot; COMING SOON</span>
+          <div class="shop-name">Your salon here</div>
+        </div>
+        <div class="sign-card sign-card-3">
+          <span class="shop-tag">YOUR SHOP &middot; NEXT</span>
+          <div class="shop-name">Let's talk</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span><b>Based in</b> Ahmedabad, Gujarat</span>
+    <span><b>Built for</b> cafes, salons &amp; local shops</span>
+    <span><b>No</b> monthly platform fees</span>
+    <span><b>Direct</b> WhatsApp support, no ticket system</span>
+  </div>
+</div>
+
+<section class="catalogue reveal" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The catalogue</div>
+      <h2>What I build</h2>
+      <p>Every business gets a one-page website built around what actually matters: your menu or services, real photos, your location, and an easy way for people to reach you.</p>
+    </div>
+
+    <div class="catalogue-grid">
+      <div class="cat-card cafe">
+        <div class="cat-card-top">
+          <span class="cat-tag">Live sample</span>
+          <h3>Kasturi Caf&eacute;</h3>
+          <p>A neighbourhood caf&eacute; site with a full menu, story section, and a chalkboard-style price list.</p>
+        </div>
+        <div class="cat-card-bottom">
+          <ul class="cat-features">
+            <li>Menu with pricing</li>
+            <li>Photo gallery</li>
+            <li>Map &amp; visiting hours</li>
+          </ul>
+          <a href="kasturi-cafe-template.html" class="cat-link">View the site &rarr;</a>
+        </div>
+      </div>
+
+      <div class="cat-card salon">
+        <div class="cat-card-top">
+          <span class="cat-tag">Coming soon</span>
+          <h3>Salon &amp; spa template</h3>
+          <p>Service menu, booking details, and before/after style galleries built for salons and spas.</p>
+        </div>
+        <div class="cat-card-bottom">
+          <ul class="cat-features">
+            <li>Services &amp; pricing</li>
+            <li>Stylist highlights</li>
+            <li>WhatsApp booking link</li>
+          </ul>
+          <span class="cat-link">In progress</span>
+        </div>
+      </div>
+
+      <div class="cat-card coming">
+        <div class="cat-card-top">
+          <span class="cat-tag">Reserved for you</span>
+          <h3>Your business</h3>
+          <p>Retail, clinics, gyms, tutoring centres &mdash; tell me about your shop and I'll build around it.</p>
+        </div>
+        <div class="cat-card-bottom">
+          <ul class="cat-features">
+            <li>Built around your content</li>
+            <li>Your own colours &amp; photos</li>
+            <li>Delivered in about a week</li>
+          </ul>
+          <a href="#contact" class="cat-link">Start a project &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process reveal" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2>From conversation to live site</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <span class="step-num mono">01</span>
+        <h3>We talk</h3>
+        <p>A quick call or WhatsApp chat about your business, your menu or services, and what you want people to see first.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-num mono">02</span>
+        <h3>I build</h3>
+        <p>I design and build your site using your real content &mdash; photos, prices, hours &mdash; not placeholder text.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-num mono">03</span>
+        <h3>You review</h3>
+        <p>You see the site before it goes live, and I make changes until it actually feels like your shop.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-num mono">04</span>
+        <h3>It goes live</h3>
+        <p>Your site goes live on your own link, ready to share on WhatsApp, Instagram, or your Google listing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing reveal" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pricing</div>
+      <h2>Flat pricing, no hourly surprises</h2>
+      <p>Every project includes your domain setup guidance, mobile-friendly design, and one round of revisions after launch.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price">&#8377;2,000</div>
+        <span class="price-note">one-time</span>
+        <ul>
+          <li>One-page website</li>
+          <li>Menu or services list</li>
+          <li>Contact &amp; location</li>
+          <li>Mobile-friendly design</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <span class="price-badge">Most chosen</span>
+        <h3>Standard</h3>
+        <div class="price">&#8377;5,000</div>
+        <span class="price-note">one-time</span>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Photo gallery section</li>
+          <li>Your story / about section</li>
+          <li>Google Maps embed</li>
+          <li>WhatsApp contact button</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <h3>Custom</h3>
+        <div class="price">Let's talk</div>
+        <span class="price-note">scoped to your needs</span>
+        <ul>
+          <li>Multiple pages</li>
+          <li>Online booking integration</li>
+          <li>Custom domain &amp; email setup</li>
+          <li>Ongoing updates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact reveal" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">Get in touch</div>
+      <h2>Let's build your site.</h2>
+      <p>Send me a message with your business name and what you're looking for &mdash; I'll get back to you within a day, usually sooner.</p>
+      <div class="contact-actions">
+        <a href="https://wa.me/919426001767" class="btn-marigold">Message on WhatsApp</a>
+        <a href="tel:+919426001767" class="btn-outline">Call directly</a>
+      </div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-row">
+        <div class="lbl">Phone</div>
+        <div class="val"><a href="tel:+919426001767">+91 94260 01767</a></div>
+      </div>
+      <div class="contact-row">
+        <div class="lbl">Email</div>
+        <div class="val"><a href="mailto:devamsoniwork@gmail.com">devamsoniwork@gmail.com</a></div>
+      </div>
+      <div class="contact-row">
+        <div class="lbl">Based in</div>
+        <div class="val">Ahmedabad, Gujarat</div>
+      </div>
+      <div class="contact-row">
+        <div class="lbl">Response</div>
+        <div class="val">Usually within 24 hours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>&copy; 2026 Devam Soni &middot; Web design, Ahmedabad</span>
+    <span><a href="#top">Back to top &uarr;</a></span>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
