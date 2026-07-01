@@ -5,7 +5,7 @@ Portfolio site for local web design work — built for Ahmedabad cafes, salons &
 
 A portfolio and catalogue site for freelance web design work, built for local businesses in Ahmedabad — cafes, salons, and small shops that don't have a website yet.
 
-**Live site:** [Add your GitHub Pages link here]
+**Live site:** https://yourlocaldrugdealer1.github.io/devam-website-portfolio
 
 ## What's in this repo
 
